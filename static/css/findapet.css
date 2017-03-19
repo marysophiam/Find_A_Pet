@@ -1,0 +1,44 @@
+body {
+    background-image: url("../images/furry_friends_await_BW_1600x900.png");
+    color: #e62e00;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+
+div {
+    padding-top: 1%;
+    text-align: center;
+}
+
+
+div#form {
+    font-size: 24px;
+    padding-top: 0.%;
+
+}
+
+
+h1 {
+    font-size: 112px;
+}
+
+
+h2 {
+    font-size: 48px;
+}
+
+
+h3 {
+    font-size: 28px;
+    padding-top: 0%;
+}
+
+
+input[type="radio"] {
+  margin: 0 10px 0 40px;
+}
+
+
+#pet {
+    font-size: 36px;
+}
