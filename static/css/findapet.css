@@ -1,20 +1,13 @@
 body {
     background-image: url("../images/furry_friends_await_BW_1600x900.png");
     color: #e62e00;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: Tahoma, Geneva, sans-serif;
 }
 
 
 div {
     padding-top: 1%;
     text-align: center;
-}
-
-
-div#form {
-    font-size: 24px;
-    padding-top: 0.%;
-
 }
 
 
@@ -36,6 +29,12 @@ h3 {
 
 input[type="radio"] {
   margin: 0 10px 0 40px;
+}
+
+
+#form {
+    font-size: 24px;
+    padding-top: 0%;
 }
 
 

@@ -1,23 +1,64 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 import petfinder
 
-# import json
+from petfinder.exceptions import LimitExceeded
 
 from api_key import API_KEY, API_SECRET
 
+from urllib2 import urlopen
+
+from json import load
+
 app = Flask(__name__)
 
-api = petfinder.PetFinderClient(api_key='API_KEY', api_secret='API_SECRET')
+api = petfinder.PetFinderClient(api_key=API_KEY, api_secret=API_SECRET)
+
+# response = urlopen(api)
+
+# json_obj = load(response)
+
+# print json_obj
+# response = urlopen(api)
+
+# json_obj = load(response)
+
+# print json_obj
 
 @app.route("/")
 def find_a_pet():
+   
     return render_template("index.html")
 
 
 @app.route("/results")
 def return_results():
-    return render_template("results.html")
+
+    animal = request.args.get("animal")
+    zipcode = request.args.get("zipcode")
+
+    pet_ids = []
+    # pet_names = []
+
+    try:
+        received_count = 0
+
+        for pet in api.pet_find(
+                animal=animal, location=zipcode, output="basic", count=10
+                ):
+            # print ("%s - %s" % (pet["id"], pet["name"]))
+
+            received_count += 1
+            pet_ids.append(pet)
+
+            if received_count > 10:
+                break
+
+    except LimitExceeded:
+        pass
+
+
+    return render_template("results.html", pets=pet_ids)
 
 
 if __name__ == "__main__":
@@ -63,10 +104,6 @@ if __name__ == "__main__":
 # # Instantiate the client with your credentials.
 # api = petfinder.PetFinderClient(api_key='yourkey', api_secret='yoursecret')
 
-# # Query away!
-# for shelter in api.shelter_find(location='30127', count=500):
-#     print(shelter['name'])
-
 # # Search for pets.
 # for pet in api.pet_find(
 #     animal="dog", location="29678", output="basic",
@@ -74,4 +111,5 @@ if __name__ == "__main__":
 # ):
 #     print("%s - %s" % (pet['id'], pet['name']))
 
-# # TODO: Find homes for these guys.
+
+# higa602@gmail.com

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Find-A-Pet!</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/findapet.css">
+</head>
+
+<body>
+    <div>
+       <h2>Check out these furry friends...they're waiting for YOU!</h2>
+    </div>
+    <div>
+        {% for pet in pets %}
+        <li>{{pet.name}}
+            {% for picture in pet.photos %}
+                {% if picture.size == "fpm" %}
+                    <img src="{{picture.url}}">
+                {% endif %}
+            {% endfor %}
+        </li>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
